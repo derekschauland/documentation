@@ -16,14 +16,19 @@ When you run this build, the *.auto.tfvars that you will need to supply include 
 - DataBaseName - the name of the SQL Database that you are building - where the data will live
 
 #### Note: #### 
-``` *.auto.tfvars file is required to send along the values that will populate variables used when terraform executes. Without them, no build will happen.```
-``` Also - names and subscription info have been changed to protect the guilty``` 
+``` *.auto.tfvars file is required to send along the values that will populate variables used when terraform executes. Without them, no build will happen.``` 
 
 ### Prerequisites
 To build this environment you will need access to the following:
-Terraform version 0.13 - [available here](https://dereks.info/get-tf) for Windows, Mac, and a whole mess of Linux.
-AzureRM provider at least 2.20 - more info about the [Azure RM Provider](#azure-rm-provider) can be found below.
-Azure CLI - [available here](https://dereks.info/get-az-cli)
+- Terraform version 0.13 - [available here](https://dereks.info/get-tf) for Windows, Mac, and a whole mess of Linux.
+- AzureRM provider at least 2.20 - more info about the [Azure RM Provider](#azure-rm-provider) can be found below.
+- Azure CLI - [available here](https://dereks.info/get-az-cli)
+
+#### Nice to haves
+- VSCode Terraform Extension - [available here](https://dereks.info/tf-vscode)
+- VSCode Azure Terraform Extension - [available here](https://dereks.info/tf-az-vscode)
+- Common Terraform Snippets for VSCode [available here](https://dereks.info/tf-snppets) Replaces existing user settings file called terraform.json 
+- Online Snippet builder (in case you want to add more) - [availabe here](https://dereks.info/vscode-snippets)
 
 #### Remote-State
 Terraform uses state to keep track of infrastructure it has provisioned and help it to be idempotent (meaning only things that require change will be affected). To work with this across Coterie, we are leveraging terraform cloud to manage terraform state. This prevents state for specific resources from existing on someone's laptop or requiring management within a storage account or on a virtual machine serving as the terraform build server. You can run terraform files without the code below, but they will be initialized and have state stored on your laptop/computer. Which may not be completely desireable.
@@ -86,6 +91,37 @@ Once a resource group is destroyed by Terraform, similarly to ARM based deployme
 A data source is just a representation of another terraform resource - allowing reference to an exising or unmanaged item, but no need for terraform to manage the state of the resource.
 
 ### For any existing things that you did not create, use a data source to ensure that you do not cause trouble with other resources :)
+
+## Variables
+Variables are fairly straightforward - define a thing once, like a resource name or location, and use it over and over and over again. Once you start writing terraform, you will see their usefulness right away.
+
+A variable definition looks like this:
+```
+ variable "resource_group_name" {
+    default = "my-resource-group
+}
+```
+and is referenced as var.resource_group_name
+
+There are some variables that will be needed in every terraform configuration created - off the top of my head those created for tags are the ones likely to be reused most of all.
+
+
+#### Locals
+A local configuration is used to bring variables (and other things) together right inside a terraform root module - think of a local as a way to construct a value at build time from strings, variables, and data elements.
+
+Again - Tags are the top item I can think of that might be referenced as a local - see below:
+
+```
+locals {
+    required_tags = {
+        CreatedOn = var.tag_created_on
+        CreatedBy = var.tag_created_by
+        Env = var.tag_env
+        Product = var.tag_product
+
+    }
+}
+```
 
 ### What to execute to get moving
 
