@@ -1,19 +1,15 @@
 ## Create a resource in Azure using Terraform 
 
-This repository will build an Azure SQL Database Instance for the project you are working within. 
+Please save this file as the readme for your terraform project - this will help others who might need some information about the project and terraform in general.
 
-This consists of two main components:
+Complete this section with the details about resource(s) you will be creating in this project including:
 
-The Azure SQL Database
-The SQL Server logical environment where the database resides
+The type of resource for each resource that will be created (Azure SQL Database for example)
+Any known details for the environment you are building
 
-In addition, to support the database, a storage account will also be created.
+Variables you will be using in your project
 
-When you run this build, the *.auto.tfvars that you will need to supply include the following:
-
-
-- SQLServerName - the name of the SQL Server used in your environment - will complete the URL <SQLServerName>.database.windows.net
-- DataBaseName - the name of the SQL Database that you are building - where the data will live
+------------
 
 #### Note: #### 
 ``` *.auto.tfvars file is required to send along the values that will populate variables used when terraform executes. Without them, no build will happen.``` 
