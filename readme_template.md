@@ -31,10 +31,10 @@ Terraform uses state to keep track of infrastructure it has provisioned and help
 ```
 terraform {
   backend "remote" {
-    organization = "coterie-insurance"
+    organization = "donald-ducks-farm"
 
     workspaces {
-      name = "derek_cli_playground_sql"
+      name = "derek_workspace_name"
     }
   }
 }
@@ -50,7 +50,7 @@ provider "azurerm" {
     features {}
 
     #playground subscription
-    subscription_id = "991492fd-7342-4121-972a-c39ba99a5ed8"
+    subscription_id = "99#######-###-####-####-#########d8"
     }
 ```
 When this code is included in a .tf file it will ensure that at least version 2.27 of the Azure RM provider is downloaded for use. If there are newer versions available, they will be downloaded and used for this project run. 
