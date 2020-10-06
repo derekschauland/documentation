@@ -16,7 +16,8 @@ When you run this build, the *.auto.tfvars that you will need to supply include 
 - DataBaseName - the name of the SQL Database that you are building - where the data will live
 
 #### Note: #### 
-``` *.auto.tfvars file is required to send along the values that will populate variables used when terraform executes. Without them, no build will happen.``` 
+``` *.auto.tfvars file is required to send along the values that will populate variables used when terraform executes. Without them, no build will happen.
+Also - names and subscription info have been changed to protect the guilty``` 
 
 ### Prerequisites
 To build this environment you will need access to the following:
